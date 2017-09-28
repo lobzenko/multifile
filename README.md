@@ -28,4 +28,33 @@ Usage
 Once the extension is installed, simply use it in your code by  :
 
 ```php
-<?= \lobzenko\multifile\AutoloadExample::widget(); ?>```
+public function actions()
+{
+    return [
+        'upload' => [
+            'class' => 'lobzenko\multifile\UploadAction',
+        ],
+    ];
+}```
+
+```php
+public function behaviors()
+{
+    return [
+        'multiupload' => [
+            'class' => \lobzenko\multifile\MultiFileBehavior::className(),
+            'relations' => [
+                'file' => [
+                    'model' => 'lobzenko\multifile\models\Media',
+                ],
+            ],
+        ],
+    ];
+}```
+
+```php
+<?= \lobzenko\multifile\MultiFileWidget::widget([
+    'model' => $model,
+    'relation' => 'file',
+    'grouptype' => 1,
+]) ?>```
