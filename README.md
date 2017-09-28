@@ -35,7 +35,8 @@ public function actions()
             'class' => 'lobzenko\multifile\UploadAction',
         ],
     ];
-}```
+}
+```
 
 ```php
 public function behaviors()
@@ -50,7 +51,8 @@ public function behaviors()
             ],
         ],
     ];
-}```
+}
+```
 
 ```php
 <?= \lobzenko\multifile\MultiFileWidget::widget([
