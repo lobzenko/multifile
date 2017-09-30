@@ -188,14 +188,14 @@ class qqFileUploader {
             }
         }
 
-        if ($this->file->save($uploadDirectory . $filename . '.' . $ext))
+        if ($this->file->save($uploadDirectory . DIRECTORY_SEPARATOR . $filename . '.' . $ext))
         {
-            $size = getimagesize($uploadDirectory . $filename . '.' . $ext);
+            $size = getimagesize($uploadDirectory . DIRECTORY_SEPARATOR . $filename . '.' . $ext);
 
             if (isset($size[1]))
                 return array(
                     'success'=>true,
-                    'filelink'=>"/". $uploadDirectory . $filename . '.' . $ext,
+                    'filelink'=>"/". $uploadDirectory . DIRECTORY_SEPARATOR . $filename . '.' . $ext,
                     'height'=>$size[0],
                     'width'=>$size[1],
                     'filename'=> $this->file->getName()
@@ -203,7 +203,7 @@ class qqFileUploader {
             else
                 return array(
                     'success'=>true,
-                    'filelink'=>"/". $uploadDirectory . $filename . '.' . $ext,
+                    'filelink'=>"/". $uploadDirectory . DIRECTORY_SEPARATOR . $filename . '.' . $ext,
                     'filename'=> $this->file->getName()
                 );
         } else {

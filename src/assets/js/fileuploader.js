@@ -994,6 +994,9 @@ qq.extend(qq.UploadHandlerForm.prototype, {
     },
     _upload: function(id, params){
         var input = this._inputs[id];
+        var csrfInput = document.createElement("input");
+        csrfInput.setAttribute('name', yii.getCsrfParam());
+        csrfInput.setAttribute('value', yii.getCsrfToken());
 
         if (!input){
             throw new Error('file with passed id was not added, or already uploaded or cancelled');
@@ -1004,6 +1007,7 @@ qq.extend(qq.UploadHandlerForm.prototype, {
         var iframe = this._createIframe(id);
         var form = this._createForm(iframe, params);
         form.appendChild(input);
+        form.appendChild(csrfInput);
 
         var self = this;
         this._attachLoadEvent(iframe, function(){
@@ -1192,16 +1196,12 @@ qq.extend(qq.UploadHandlerXhr.prototype, {
             }
         };
 
-        // build query string
-        params = params || {};
-        params['qqfile'] = name;
-        var queryString = qq.obj2url(params, this._options.action);
+        var formData = new FormData();
+        formData.append(yii.getCsrfParam(), yii.getCsrfToken());
+        formData.append("qqfile", file);
 
-        xhr.open("POST", queryString, true);
-        xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
-        xhr.setRequestHeader("X-File-Name", encodeURIComponent(name));
-        xhr.setRequestHeader("Content-Type", "application/octet-stream");
-        xhr.send(file);
+        xhr.open('POST', this._options.action, true);
+        xhr.send(formData);
     },
     _onComplete: function(id, xhr){
         // the request was aborted/cancelled

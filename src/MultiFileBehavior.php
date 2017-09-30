@@ -177,7 +177,7 @@ class MultiFileBehavior extends Behavior
 
 			if (!empty($POSTs))
 			{
-				$classModel = "app\models\\".$settings['model'];
+				$classModel = $settings['model'];
 
 				foreach ($POSTs as $key=>$post)
 				{
@@ -280,7 +280,7 @@ class MultiFileBehavior extends Behavior
 
 			if (!empty($delete_ids))
 			{
-				$classModel = "app\models\\".$settings['model'];
+				$classModel = $settings['model'];
 				$mediaModel = new $classModel;
 				$media_pk = $mediaModel->tableSchema->primaryKey[0];
 

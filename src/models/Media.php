@@ -5,12 +5,12 @@ namespace lobzenko\multifile\models;
 use Yii;
 
 use yii\imagine\Image;
-use app\helpers\helper\Helper;
+use yii\helpers\FileHelper;
 
 /**
  * This is the model class for table "{{%media}}".
  *
- * @property integer $id_media
+ * @property integer $id
  * @property integer $date
  * @property integer $type
  * @property string $size
@@ -58,7 +58,7 @@ class Media extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id_media' => 'Id Media',
+            'id' => 'Id Media',
             'date' => 'Date',
             'type' => 'Type',
             'size' => 'Size',
@@ -85,7 +85,7 @@ class Media extends \yii\db\ActiveRecord
             return false;
 
         $size = getimagesize($root.$file);
-        $ext = Helper::getImageExtention($size['mime']);
+        $ext = FileHelper::getExtensionsByMimeType($root.$file);
 
         if (empty($ext))
             $ext = substr($file, strrpos($file, '.')+1);
@@ -130,10 +130,10 @@ class Media extends \yii\db\ActiveRecord
         if ($this->isNewRecord)
             return str_replace($root,'',$this->file_path);
 
-        $url_piece = '/content/media/';
+        $url_piece = '/media/';
         $dir = $root.$url_piece;
 
-        $file = md5($this->id_media);
+        $file = md5($this->id);
 
         // разбиваем на вложенные две папки
         $level1 = substr($file,0,2);
@@ -144,7 +144,7 @@ class Media extends \yii\db\ActiveRecord
         if (!is_dir($dir.$level1.'/'.$level2))
             mkdir($dir.$level1.'/'.$level2);
 
-        $filename = $this->id_media.'.'.$this->extension;
+        $filename = $this->id.'.'.$this->extension;
 
         if ($fullPath)
             $url_piece = $dir;
@@ -156,7 +156,7 @@ class Media extends \yii\db\ActiveRecord
     {
         $root = Yii::getAlias('@webroot');
 
-        $url_piece = '/content/media/';
+        $url_piece = '/media/';
         $dir = $root.$url_piece;
 
         $file = md5($id_media);
@@ -249,7 +249,7 @@ class Media extends \yii\db\ActiveRecord
         else
             $thumb_ext = $ext;
 
-        /*$cdn_hash = $this->id_media.'_'.$options['w'].$thumb_ext;
+        /*$cdn_hash = $this->id.'_'.$options['w'].$thumb_ext;
 
         // если изображение лежит в CDN
         if ($this->state == 1)
