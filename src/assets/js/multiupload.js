@@ -147,13 +147,13 @@
 
 					if (!settings.single)
 					{
-						files_list.append($(li_tmpl(responseJSON.filelink, fileName, new_index, 0)));
+						files_list.append($(li_tmpl(responseJSON.filelink, responseJSON.filename, new_index, 0)));
 						new_index++;
 					}
 					else
 					{
 						files_list.html('');
-						files_list.append($(li_tmpl(responseJSON.filelink, fileName, new_index, 0)));
+						files_list.append($(li_tmpl(responseJSON.filelink, responseJSON.filename, new_index, 0)));
 					}
 				},
 			});

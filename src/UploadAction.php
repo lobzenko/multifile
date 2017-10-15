@@ -198,13 +198,13 @@ class qqFileUploader {
                     'filelink'=>"/". $uploadDirectory . DIRECTORY_SEPARATOR . $filename . '.' . $ext,
                     'height'=>$size[0],
                     'width'=>$size[1],
-                    'filename'=> $this->file->getName()
+                    'filename'=> $pathinfo['filename']
                 );
             else
                 return array(
                     'success'=>true,
                     'filelink'=>"/". $uploadDirectory . DIRECTORY_SEPARATOR . $filename . '.' . $ext,
-                    'filename'=> $this->file->getName()
+                    'filename'=> $pathinfo['filename']
                 );
         } else {
             return array('error'=> 'Could not save uploaded file.' .

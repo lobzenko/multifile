@@ -122,6 +122,11 @@ class Media extends \yii\db\ActiveRecord
         return true;
     }
 
+    public function getFilename()
+    {
+        return $this->name.'.'.$this->extension;
+    }
+
     public function getFilePath($fullPath = false)
     {
         $root = Yii::getAlias('@webroot');
