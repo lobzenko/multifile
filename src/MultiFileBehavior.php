@@ -250,7 +250,7 @@ class MultiFileBehavior extends Behavior
 						$mediaModel->saveFile();
 
 						// добавляем связочку
-						if (!empty($settings['jtable']))
+						// if (!empty($settings['jtable']))
 							$this->owner->link($relation_name,$mediaModel);
 
 						$ids_models[] = $mediaModel_pk;

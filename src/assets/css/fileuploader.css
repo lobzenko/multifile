@@ -1,13 +1,13 @@
-.qq-uploader { position:relative; width: 100%; height:60px; border:1px dashed #ccc; margin-bottom:20px;}
+.qq-uploader { position:relative; width: 100%; height:60px; border:1px dashed #ccc; margin-bottom: 20px;}
 
 .qq-upload-button {
 	position:absolute!important; left:-1px; top:-1px; bottom: -1px; height: auto!important; width: 200px;  line-height: 50px!important; z-index:10;
 }
 
-.file-uploaded {padding-left: 200px; margin-top: -21px;}
 .file-uploaded table td {vertical-align: middle!important; border-bottom:1px solid #ddd; border-top:1px solid #fff;}
 .file-uploaded table tr {background: #eee;}
-.file-uploaded .btn {padding: 9px 12px 8px;}
+.file-uploaded table .btn {padding: 9px 12px 8px;}
+.file-uploaded .input-group {margin-bottom: 15px;}
 
 .qq-upload-button .glyphicon-download {font-size: 20px; position: relative; top: 5px; left: -3px;}
 
@@ -15,11 +15,11 @@
 .qq-upload-button-focus {outline:1px dotted black;}
 
 .qq-upload-drop-area {
-    position:absolute; top:0; left:0; width:100%; height:100%; min-height: 70px; z-index:2;
+    position:absolute; top:0; left:0; width:100%; height:100%; z-index:2;
     text-align:center;
 }
 .qq-upload-drop-area span {
-    display:block; position:absolute; top: 50%; width:100%; margin-top:-13px; font-size:14px;
+    display:block; position:absolute; top: 50%; width:100%; margin-top:-9px; font-size:14px;
 }
 .qq-upload-drop-area-active {background:#FF7171;}
 
@@ -36,13 +36,9 @@
 .qq-upload-failed-text {display:none;}
 .qq-upload-fail .qq-upload-failed-text {display:inline;}
 
-.file-uploaded .thumbnail { margin-bottom: 0px;     max-height: 90px;
-    margin-bottom: 0px;
-    max-width: 150px;}
-
+.file-uploaded .thumbnail {max-height: 90px; margin-bottom: 0px; max-width: 150px;}
 .file-uploaded-container {list-style-type: none; padding-left: 0px;}
 .file-uploaded-container img {max-width: 100%;}
 .file-uploaded-container li {position: relative;}
 .file-uploaded-container .close {position: absolute; right: 0px; top: 0px;}
-.file-uploaded {margin-bottom: 20px; overflow: hidden; padding-left: 0px;}
 .file-uploaded .thumbnail {background-color: #eee;}
