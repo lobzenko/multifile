@@ -12,6 +12,8 @@ class UploadAction extends Action
 
     public $sizeLimit = 50 * 1024 * 1024;
 
+    public $root = '@webroot';
+
     public $imageDirectory = 'images';
 
     public $filesirectory = 'files';
@@ -24,12 +26,14 @@ class UploadAction extends Action
 
         $uploader = new qqFileUploader($this->allowedExtensions, $this->sizeLimit);
 
+        $root = Yii::getAlias($this->root);
+
         if (!empty($_GET['image']))
-            $result = $uploader->handleUpload($this->imageDirectory);
+            $result = $uploader->handleUpload($this->imageDirectory, $root);
         elseif (!empty($_GET['file']))
-            $result = $uploader->handleUpload($this->filesirectory);
+            $result = $uploader->handleUpload($this->filesirectory, $root);
         else
-            $result = $uploader->handleUpload($this->uploadDirectory);
+            $result = $uploader->handleUpload($this->uploadDirectory, $root);
 
         return $result;
     }
@@ -152,8 +156,8 @@ class qqFileUploader {
     /**
      * Returns array('success'=>true) or array('error'=>'error message')
      */
-    function handleUpload($uploadDirectory, $replaceOldFile = FALSE){
-        if (!is_writable($uploadDirectory)){
+    function handleUpload($uploadDirectory, $root, $replaceOldFile = FALSE){
+        if (!is_writable($root . DIRECTORY_SEPARATOR . $uploadDirectory)){
             return array('error' => "Server error. Upload directory isn't writable.");
         }
 
@@ -183,14 +187,14 @@ class qqFileUploader {
 
         if (!$replaceOldFile){
             /// don't overwrite previous files that were uploaded
-            while (file_exists($uploadDirectory . DIRECTORY_SEPARATOR . $filename . '.' . $ext)) {
+            while (file_exists($root . DIRECTORY_SEPARATOR . $uploadDirectory . DIRECTORY_SEPARATOR . $filename . '.' . $ext)) {
                 $filename .= rand(10, 999);
             }
         }
 
-        if ($this->file->save($uploadDirectory . DIRECTORY_SEPARATOR . $filename . '.' . $ext))
+        if ($this->file->save($root . DIRECTORY_SEPARATOR . $uploadDirectory . DIRECTORY_SEPARATOR . $filename . '.' . $ext))
         {
-            $size = getimagesize($uploadDirectory . DIRECTORY_SEPARATOR . $filename . '.' . $ext);
+            $size = getimagesize($root . DIRECTORY_SEPARATOR . $uploadDirectory . DIRECTORY_SEPARATOR . $filename . '.' . $ext);
 
             if (isset($size[1]))
                 return array(

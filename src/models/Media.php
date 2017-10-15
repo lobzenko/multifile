@@ -31,6 +31,7 @@ class Media extends \yii\db\ActiveRecord
 
     public $file_path;
     public $cover;
+    public $root = '@webroot';
 
     /**
      * @inheritdoc
@@ -78,7 +79,7 @@ class Media extends \yii\db\ActiveRecord
 
     public function getImageAttributes($file,$post=array())
     {
-        $root = Yii::getAlias('@webroot');
+        $root = Yii::getAlias($this->root);
 
         // получаем атрибуты изображения
         if (!is_file($root.$file))
@@ -110,7 +111,7 @@ class Media extends \yii\db\ActiveRecord
     **/
     public function saveFile()
     {
-        $root = Yii::getAlias('@webroot');
+        $root = Yii::getAlias($this->root);
 
         //$this->extension = substr($this->file_path,strrpos($this->file_path,'.')+1);
 
@@ -129,7 +130,7 @@ class Media extends \yii\db\ActiveRecord
 
     public function getFilePath($fullPath = false)
     {
-        $root = Yii::getAlias('@webroot');
+        $root = Yii::getAlias($this->root);
 
         // если это еще не сохраненное изображение
         if ($this->isNewRecord)
@@ -159,7 +160,7 @@ class Media extends \yii\db\ActiveRecord
 
     public static function getOrigin($id_media,$fullPath=false)
     {
-        $root = Yii::getAlias('@webroot');
+        $root = Yii::getAlias($this->root);
 
         $url_piece = '/media/';
         $dir = $root.$url_piece;
@@ -199,7 +200,7 @@ class Media extends \yii\db\ActiveRecord
         if (empty($dest_folder))
             $dest_folder = '/assets/preview/';
 
-        $root = Yii::getAlias('@webroot');
+        $root = Yii::getAlias($this->root);
         $preview_dir = $root.$dest_folder;
 
         $thumb_ext = ".jpg";
@@ -245,7 +246,7 @@ class Media extends \yii\db\ActiveRecord
             return $source;
 
         $preview_path = '/assets/preview/';
-        $root = Yii::getAlias('@webroot');
+        $root = Yii::getAlias($this->root);
         $preview_dir = $root.$preview_path;
         $ext = substr($source,strrpos($source,'.'));
 
