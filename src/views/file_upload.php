@@ -19,10 +19,7 @@ $uniq_id = substr(md5(time().rand(0,9999)),0,10);
 <input type="hidden" name="multiupload_<?=$POST_relation_name?>" value="1" />
 <?php
 $records = json_encode($records);
-
-if (!empty($extensions)) {
-	$allowedExtensions = "allowedExtensions: ['".implode("','",$extensions)."'],";
-}
+$allowedExtensions = "allowedExtensions: [" . (!empty($extensions) ? "'" . implode("','",$extensions) . "'" : '') . "],";
 
 $script = <<< JS
 	$(document).ready(function(){
