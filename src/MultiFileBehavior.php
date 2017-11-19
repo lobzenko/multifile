@@ -71,8 +71,6 @@ class MultiFileBehavior extends Behavior
 		if (!empty($this->records[$relation_name]))
 			return $this->records[$relation_name];
 
-		$relation_name = strtolower($relation_name);
-
 		$settings = $this->relations[$relation_name];
 
 		$this->records[$relation_name] = [];
@@ -334,7 +332,7 @@ class MultiFileBehavior extends Behavior
 	// сделать превью
 	public function makeThumb($option='')
 	{
-		$relation = strtolower($this->cover);
+		$relation = $this->cover;
 
 		if (!empty($this->owner->$relation))
 			return $this->owner->$relation->showThumb($option);

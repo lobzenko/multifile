@@ -8,7 +8,7 @@ use yii\base\Widget;
 
 class MultiFileWidget extends Widget
 {
-    public $uploadAction = 'site/upload';
+    public $uploadAction = '/site/upload';
 
 	public $model;
 

@@ -41,7 +41,19 @@
 			}
 
 			if (settings.tpl==1)
-				return '<div id="file'+index+'" class="form-group">\
+				return '<tr id="file'+index+'">\
+						'+preview+'\
+						<td valign="top">\
+							<input type="text" class="form-control" name="'+settings.relationname+'['+settings.group+']['+index+'][name]" rel="name" value="'+data.name+'" placeholder="Заголовок" />\
+							<input type="hidden" name="'+settings.relationname+'['+settings.group+']['+index+'][file_path]" value="'+file+'"/>\
+							<input type="hidden" name="'+settings.relationname+'['+settings.group+']['+index+'][id_media]" value="'+id_media+'"/>\
+							<input type="hidden" name="'+settings.relationname+'['+settings.group+']['+index+'][ord]" rel="ord" value="'+index+'"/>\
+							<input type="hidden" name="'+settings.relationname+'['+settings.group+']['+index+'][grouptype]" rel="name" value="'+settings.group+'"/>\
+							<textarea maxlength="255" class="form-control" name="'+settings.relationname+'['+settings.group+']['+index+'][description]" rel="description" placeholder="Описание">'+data.description+'</textarea>\
+						</td>\
+						<td width="15"><a class="close btn btn-default" onclick="$(this).parent().parent().remove(); return false;">&times;</a></td>\
+					</tr>';
+				/*return '<div id="file'+index+'" class="form-group">\
 					<div class="input-group">\
 						<input type="text" class="form-control" name="'+settings.relationname+'['+settings.group+']['+index+'][name]" rel="name" value="'+fileName+'" placeholder="Заголовок" />\
 						<input type="hidden" name="'+settings.relationname+'['+settings.group+']['+index+'][file_path]" value="'+file+'"/>\
@@ -55,7 +67,7 @@
 						</span>\
 					</div>\
 					<textarea maxlength="255" class="form-control" name="'+settings.relationname+'['+settings.group+']['+index+'][description]" rel="description" placeholder="Описание">'+data.description+'</textarea>\
-				</div>';
+				</div>';*/
 			else
 				return '<li id="file'+index+'">\
 							<img src="'+file+'"/>\
@@ -94,7 +106,8 @@
 			var files_list = $('<div class="file-uploaded"></div>');
 			if (settings.tpl==1)
 			{
-				files_list.append('<div class="file-uploaded-container sortable"></div');
+				//files_list.append('<div class="file-uploaded-container sortable"></div');
+				files_list.append('<table class="file-uploaded-container table sortable" width="100%" cellspacing="0" cellpadding="0"></table');
 
 				if (!settings.single)
 				{

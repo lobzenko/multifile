@@ -14,9 +14,9 @@ class UploadAction extends Action
 
     public $root = '@webroot';
 
-    public $imageDirectory = 'images';
+    public $imageDirectory = 'content/images';
 
-    public $filesirectory = 'files';
+    public $filesirectory = 'content/files';
 
     public $uploadDirectory = 'upload';
 
